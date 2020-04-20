@@ -21,7 +21,7 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                    withTool('docker', 'latest'){
+                    withTool('docker'){
                         sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ." 
                     }
                 }
@@ -38,7 +38,7 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                withTool('docker', 'latest'){
+                withTool('docker'){
                     sh "docker login -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN} iad.ocir.io"
                     sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                     sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" 
