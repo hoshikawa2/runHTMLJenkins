@@ -1,0 +1,6 @@
+projectKey=runhtml
+serverUrl=http://150.136.184.232:32500
+serverVersion=8.2.0.32929
+dashboardUrl=http://150.136.184.232:32500/dashboard?id=runhtml
+ceTaskId=AXDbRU2bgcHVqGsjvqyA
+ceTaskUrl=http://150.136.184.232:32500/api/ce/task?id=AXDbRU2bgcHVqGsjvqyA
