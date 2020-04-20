@@ -21,7 +21,9 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ." 
+                    withTool('docker', 'latest'){
+                        sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ." 
+                    }
                 }
             }
         }
@@ -36,9 +38,11 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                sh "docker login -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN} iad.ocir.io"
-                sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
-                sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" 
+                withTool('docker', 'latest'){
+                    sh "docker login -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN} iad.ocir.io"
+                    sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
+                    sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" 
+                }
                 env.GIT_COMMIT = scmVars.GIT_COMMIT
                 sh "export GIT_COMMIT=${env.GIT_COMMIT}"
                 }
