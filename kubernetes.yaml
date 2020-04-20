@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: runhtml-deployment
+spec:
+  selector:
+    matchLabels:
+      app: runhtml
+  replicas: 1 # deployment runs 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: runhtml
+    spec:
+      containers:
+      - name: runhtml
+        image: iad.ocir.io/id4beafwqb9e/cristianohoshikawa/runhtml:latest
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      # enter the name of the secret you created
+      - name: ocirsecret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: runhtml-service
+spec:
+#  type: LoadBalancer #Exposes the service as a node port
+#  ports:
+#  - port: 8080
+#    targetPort: 8080
+#  selector:
+#    app: runhtml
+  selector:
+    app: runhtml
+  type: NodePort
+  ports:
+  - port: 8080 
