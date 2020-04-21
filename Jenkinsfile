@@ -22,6 +22,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /* sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ." */
+                    sh "yum install -y docker-client"
                     app = docker.build("runhtml:${scmVars.GIT_COMMIT}")
                 }
             }
