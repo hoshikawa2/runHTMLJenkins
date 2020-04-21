@@ -53,5 +53,12 @@ pipeline {
                 }                       
             }
         }
+        
+        stage('Remove Unused docker image') {
+          steps{
+            sh "docker rmi " + params.DOCKER_REPO + "/runhtml:latest"
+          }
+        } 
+        
     }
 }
