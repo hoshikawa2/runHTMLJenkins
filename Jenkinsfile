@@ -43,7 +43,7 @@ pipeline {
                         sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
 
                         docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
-                            app.push("${env.BUILD_NUMBER}")
+                            app.push("${scmVars.DOCKER_REPO}/runhtml")
                             app.push("latest")
                         }                        
                 }                       
