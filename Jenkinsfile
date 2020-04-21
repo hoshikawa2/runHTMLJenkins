@@ -28,7 +28,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /* app = docker.build(registry + "/runhtml:latest")  */
-                    sh 'docker build -t ' + ${DOCKER_REPO} + '/runhtml:latest .'
+                    sh 'docker build -t ' + params.DOCKER_REPO + '/runhtml:latest .'
                 }
             }
         }
@@ -48,8 +48,8 @@ pipeline {
                             app.push(registry + "/runhtml")
                         }               
     */
-                    sh 'docker login https://iad.ocir.io -u ' + ${REGISTRY_USERNAME} + ' -p "' + ${REGISTRY_TOKEN} + '"'
-                    sh 'docker push ' + ${DOCKER_REPO} + '/runhtml:latest'
+                    sh 'docker login https://iad.ocir.io -u ' + params.REGISTRY_USERNAME + ' -p "' + params.REGISTRY_TOKEN + '"'
+                    sh 'docker push ' + params.DOCKER_REPO + '/runhtml:latest'
                 }                       
             }
         }
