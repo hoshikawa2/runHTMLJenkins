@@ -7,6 +7,7 @@ pipeline {
     environment {
         registry = "iad.ocir.io/idavixsf5sbx/cristianohoshikawa"
         registryCredential = 'docker-credential'
+        app = ''
     }
     stages {
         
@@ -26,7 +27,6 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                    /*sh "docker build -f Dockerfile -t " + registry + "/runhtml:latest ."*/
                     app = docker.build(registry + "/runhtml:latest") 
                 }
             }
@@ -42,18 +42,9 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-    sh "id"
-    sh "echo $PATH"
-    sh "docker images"
-    sh "docker push " + registry + "/runhtml:latest"
-                    /*sh "docker login iad.ocir.io -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN}"
-                        sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
-                        sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
-/*
                         docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
                             app.push(registry + "/runhtml")
                         }               
-                */
                 }                       
             }
         }
