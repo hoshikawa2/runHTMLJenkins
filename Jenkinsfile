@@ -26,8 +26,8 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                    sh "docker build -f Dockerfile -t " + registry + "/runhtml:latest ."
-                    /* app = docker.build(registry + "/runhtml:latest") */
+                    /*sh "docker build -f Dockerfile -t " + registry + "/runhtml:latest ."*/
+                    app = docker.build(registry + "/runhtml:latest") 
                 }
             }
         }
@@ -42,7 +42,10 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                        /*sh "docker login iad.ocir.io -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN}"
+    sh "id"
+    sh "echo $PATH"
+    sh "docker ps"
+                    /*sh "docker login iad.ocir.io -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN}"
                         sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                         sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
 
