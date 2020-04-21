@@ -23,7 +23,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /*sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ."*/
-                    app = docker.build("${scmVars.DOCKER_REPO}/runhtml")
+                    app = docker.build("${scmVars.DOCKER_REPO}/runhtml:latest")
                 }
             }
         }
