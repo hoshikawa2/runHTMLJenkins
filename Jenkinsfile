@@ -4,6 +4,10 @@ pipeline {
       maven 'Maven'
       'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
     }   
+    environment {
+        registry = "iad.ocir.io/idavixsf5sbx/cristianohoshikawa"
+        registryCredential = 'docker-credential'
+    }
     stages {
         
         stage('Build') { 
@@ -23,7 +27,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /*sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ."*/
-                    app = docker.build("${scmVars.DOCKER_REPO}/runhtml:latest")
+                    app = docker.build(registry + "/runhtml:latest")
                 }
             }
         }
@@ -42,7 +46,7 @@ pipeline {
                         sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                         sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
 
-                        docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
+                        docker.withRegistry('https://iad.ocir.io', registryCredential) {
                             app.push()
                         }                        
                 }                       
