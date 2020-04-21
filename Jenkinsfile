@@ -42,7 +42,6 @@ pipeline {
                         #sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT} -v /var/run/docker.sock:/var/run/docker.sock"
                         #sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" 
                         */
-                    def scmVars = checkout([
 
                         docker.withRegistry('iad.ocir.io', '-u ${scmVars.REGISTRY_USERNAME} -p ${scmVars.REGISTRY_TOKEN}') {
                             app.push("${scmVars.DOCKER_REPO}:${scmVars.GIT_COMMIT}")
@@ -50,7 +49,6 @@ pipeline {
                         }
                         env.GIT_COMMIT = scmVars.GIT_COMMIT
                         sh "export GIT_COMMIT=${env.GIT_COMMIT}"
-                    ])
                         
                 }                       
             }
