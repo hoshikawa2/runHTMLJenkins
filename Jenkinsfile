@@ -3,7 +3,6 @@ pipeline {
     tools {
       maven 'Maven'
       'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
-      oci 'oci'
     }   
     environment {
         registry = "iad.ocir.io/idavixsf5sbx/cristianohoshikawa"
