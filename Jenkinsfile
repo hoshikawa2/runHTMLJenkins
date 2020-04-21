@@ -45,14 +45,15 @@ pipeline {
     sh "id"
     sh "echo $PATH"
     sh "docker images"
+    sh "docker push " + registry + "/runhtml:latest"
                     /*sh "docker login iad.ocir.io -u ${params.REGISTRY_USERNAME} -p ${params.REGISTRY_TOKEN}"
                         sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                         sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
-
+/*
                         docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
-                            /*app.push(registry + "/runhtml")*/
-                            /*sh "docker push " + registry + "/runhtml:latest"*/
-                        }                        
+                            app.push(registry + "/runhtml")
+                        }               
+                */
                 }                       
             }
         }
