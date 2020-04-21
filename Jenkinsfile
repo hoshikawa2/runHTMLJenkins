@@ -46,10 +46,10 @@ pipeline {
     /*
                             docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
                             app.push(registry + "/runhtml")
+                        }               
     */
                             sh 'docker login https://iad.ocir.io -u ' + $REGISTRY_USERNAME + ' -p "' + $REGISTRY_TOKEN + '"'
                             sh 'docker push ' + registry + '/runhtml:latest'
-                        }               
                 }                       
             }
         }
