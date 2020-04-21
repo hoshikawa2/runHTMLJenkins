@@ -3,6 +3,19 @@ pipeline {
     tools {
       maven 'Maven'
     }
+    
+    node('master') {
+      def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+      withEnv(["DOCKER=${dockerTool}/bin"]) {
+          //stages
+          //now we can simply call: dockerCmd 'run mycontainer'
+      }
+    }
+
+    def dockerCmd(args) {
+        sh "sudo ${DOCKER}/docker ${args}"
+    }
+    
     stages {
         
         stage('Build') { 
