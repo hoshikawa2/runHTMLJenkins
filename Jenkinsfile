@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
       maven 'Maven'
-      'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '17.09.1-ce'
+      'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'latest'
     }   
     stages {
         
