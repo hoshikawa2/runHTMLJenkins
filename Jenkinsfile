@@ -27,7 +27,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /*sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ."*/
-                    app = docker.withRegistry('https://iad.ocir.io', registryCredential)
+                    app = docker.build(registry + "/runhtml:latest")
                 }
             }
         }
@@ -46,9 +46,9 @@ pipeline {
                         sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                         sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
 
-
-                            app.build(registry + "/runhtml:latest")
-                            app.push(registry + "/runhtml:latest")
+                        docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
+                            app.push(registry + "/runhtml")
+                        }                        
                 }                       
             }
         }
