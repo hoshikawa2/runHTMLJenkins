@@ -42,7 +42,7 @@ pipeline {
                         sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                         sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
 
-                        app = docker.withRegistry('iad.ocir.io', 'docker-credential') {
+                        app = docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
                             app.push("${scmVars.DOCKER_REPO}:${scmVars.GIT_COMMIT}")
                             app.push("${scmVars.GIT_COMMIT}")
                         }
