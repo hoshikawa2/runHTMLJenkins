@@ -27,7 +27,8 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                    app = docker.build(registry + "/runhtml:latest") 
+                    /* app = docker.build(registry + "/runhtml:latest")  */
+                    sh 'docker build -t ' + registry + '/runhtml:latest .'
                 }
             }
         }
@@ -42,8 +43,12 @@ pipeline {
                           ]],
                         branches: [ [name: '*/master'] ]
                       ])
-                        docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
+    /*
+                            docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
                             app.push(registry + "/runhtml")
+    */
+                            sh 'docker login https://iad.ocir.io -u ' + $REGISTRY_USERNAME + ' -p "' + $REGISTRY_TOKEN + '"'
+                            sh 'docker push ' + registry + '/runhtml:latest'
                         }               
                 }                       
             }
