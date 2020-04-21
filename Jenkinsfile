@@ -49,7 +49,6 @@ pipeline {
 
                             app.build(registry + "/runhtml:latest")
                             app.push(registry + "/runhtml:latest")
-                        }                        
                 }                       
             }
         }
