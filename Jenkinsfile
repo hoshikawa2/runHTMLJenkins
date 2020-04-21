@@ -23,7 +23,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /*sh "docker build -f Dockerfile -t runhtml:${scmVars.GIT_COMMIT} ."*/
-                    app = docker.build("runhtml:${scmVars.GIT_COMMIT}")
+                    app = docker.build("runhtml")
                 }
             }
         }
@@ -42,13 +42,10 @@ pipeline {
                         sh "docker tag runhtml:${scmVars.GIT_COMMIT} ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}"
                         sh "docker push ${params.DOCKER_REPO}:${scmVars.GIT_COMMIT}" */
 
-                        app = docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
-                            app.push("${scmVars.DOCKER_REPO}/runhtml:${scmVars.GIT_COMMIT}")
-                            app.push("${scmVars.GIT_COMMIT}")
-                        }
-                        env.GIT_COMMIT = scmVars.GIT_COMMIT
-                        sh "export GIT_COMMIT=${env.GIT_COMMIT}"
-                        
+                        docker.withRegistry('https://iad.ocir.io', 'docker-credential') {
+                            app.push("${scmVars.DOCKER_REPO}/runhtml")
+                            app.push("latest")
+                        }                        
                 }                       
             }
         }
