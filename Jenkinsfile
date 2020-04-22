@@ -51,7 +51,7 @@ pipeline {
                         }               
     */
                     sh 'docker login https://iad.ocir.io -u ' + params.REGISTRY_USERNAME + ' -p "' + params.REGISTRY_TOKEN + '"'
-                    sh 'docker push ' + params.DOCKER_REPO + '/runhtml:latest'
+                    sh 'docker push iad.ocir.io/' + params.DOCKER_REPO + '/runhtml:latest'
                 }                       
             }
         }
