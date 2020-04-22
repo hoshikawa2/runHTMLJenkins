@@ -4,11 +4,13 @@ pipeline {
       maven 'Maven'
       'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
     }   
+    /*
     environment {
         registry = "iad.ocir.io/idavixsf5sbx/cristianohoshikawa"
         registryCredential = 'docker-credential'
         app = ''
     }
+    */
     stages {
         
         stage('Build') { 
@@ -28,6 +30,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /* app = docker.build(registry + "/runhtml:latest")  */
+                    sh 'docker login https://iad.ocir.io -u ' + params.REGISTRY_USERNAME + ' -p "' + params.REGISTRY_TOKEN + '"'
                     sh 'docker build -t ' + params.DOCKER_REPO + '/runhtml:latest .'
                 }
             }
@@ -49,7 +52,7 @@ pipeline {
                         }               
     */
                     sh 'docker login https://iad.ocir.io -u ' + params.REGISTRY_USERNAME + ' -p "' + params.REGISTRY_TOKEN + '"'
-                    sh 'docker push iad.ocir.io/' + params.DOCKER_REPO + '/runhtml:latest'
+                    sh 'docker push ' + params.DOCKER_REPO + '/runhtml:latest'
                 }                       
             }
         }
