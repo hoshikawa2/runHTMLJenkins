@@ -11,6 +11,9 @@ pipeline {
         app = ''
     }
 */
+    environment {
+        DOCKER_HOST = '150.136.141.179'
+    }
     stages {
         
         stage('Build') { 
