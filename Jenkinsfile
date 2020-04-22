@@ -58,7 +58,7 @@ pipeline {
         
         stage('Remove Unused docker image') {
           steps{
-            sh "docker rmi " + params.DOCKER_REPO + "/runhtml:latest"
+            sh "docker rmi iad.ocir.io/" + params.DOCKER_REPO + "/runhtml:latest"
           }
         } 
 /*
