@@ -61,7 +61,7 @@ pipeline {
             sh "docker rmi " + params.DOCKER_REPO + "/runhtml:latest"
           }
         } 
-
+/*
         stage('Deploy to OKE') {
           steps{
             sh "mkdir -p $HOME/.kube"
@@ -76,6 +76,6 @@ pipeline {
             sh "kubectl describe pods"
           }
         } 
-        
+*/        
     }
 }
