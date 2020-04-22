@@ -61,21 +61,5 @@ pipeline {
             sh "docker rmi iad.ocir.io/" + params.DOCKER_REPO + "/runhtml:latest"
           }
         } 
-/*
-        stage('Deploy to OKE') {
-          steps{
-            sh "mkdir -p $HOME/.kube"
-            sh "oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.iad.aaaaaaaaaezdonldgvtgiojrgq2gim3bgnrwcyjsgezdcnjzgc2tkm3egjrw --file $HOME/.kube/config --region us-ashburn-1 --token-version 2.0.0"
-            sh "export KUBECONFIG=$HOME/.kube/config"
-            sh "kubectl config view"
-            sh "kubectl get nodes"
-            sh "kubectl replace -f kubernetes.yaml --force"
-            sh "sleep 120"
-            sh "kubectl get services runhtml-service"
-            sh "kubectl get pods"
-            sh "kubectl describe pods"
-          }
-        } 
-*/        
     }
 }
