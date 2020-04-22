@@ -30,8 +30,7 @@ pipeline {
                         branches: [ [name: '*/master'] ]
                       ])
                     /* app = docker.build(registry + "/runhtml:latest") */
-                    sh 'docker login https://iad.ocir.io -u ' + params.REGISTRY_USERNAME + ' -p "' + params.REGISTRY_TOKEN + '"'
-                    sh 'docker build -t ' + params.DOCKER_REPO + '/runhtml:latest .'
+                    sh 'docker build -t iad.ocir.io/' + params.DOCKER_REPO + '/runhtml:latest .'
                 }
             }
         }
