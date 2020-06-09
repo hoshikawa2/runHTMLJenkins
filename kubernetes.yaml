@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: runhtml
-  replicas: 1 # deployment runs 1 pods matching the template
+  replicas: 1 # deployment runs one pods matching the template
   template: # create pods using pod definition in this template
     metadata:
       labels:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: runhtml
-        image: iad.ocir.io/id4beafwqb9e/cristianohoshikawa/runhtml:latest
+        image: iad.ocir.io/idavixsf5sbx/cristianohoshikawa/runhtml:latest
         ports:
         - containerPort: 8080
       imagePullSecrets:
@@ -26,14 +26,27 @@ kind: Service
 metadata:
   name: runhtml-service
 spec:
-#  type: LoadBalancer #Exposes the service as a node port
+#  type: LoadBalancer #Exposes the service as a node port.
 #  ports:
 #  - port: 8080
 #    targetPort: 8080
-#  selector:
-#    app: runhtml
   selector:
     app: runhtml
+ 
   type: NodePort
   ports:
   - port: 8080 
+    nodePort: 32333
+ 
+#  clusterIP: None
+#  ports:
+#    - port: 8080
+#      name: rest
+#    - port: 30681
+#      name: inter-node
+#      targetPort: 30681
+ 
+#  ports:
+#  - port: 8080
+#    protocol: TCP
+#    targetPort: 30681
