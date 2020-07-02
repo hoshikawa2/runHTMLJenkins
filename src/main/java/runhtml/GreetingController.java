@@ -15,6 +15,11 @@ public class GreetingController {
     		@RequestParam(value="lista", defaultValue="1") String lista,
     		@RequestParam(value="nome", defaultValue="Cristiano") String nome,
     		@RequestParam(value="preco", defaultValue="123,43") String preco) {
+        try {
+            int valorSku = Integer.parseInt(sku);
+        } catch (Exception ex) {
+            System.out.println("ErroExplicito: " + ex.getMessage());
+        }
     	String msgOut = "\r\n" + 
     			"<html>\r\n" + 
     			"\r\n" + 
