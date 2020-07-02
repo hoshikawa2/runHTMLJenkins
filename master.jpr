@@ -87,6 +87,10 @@
    <hash n="oracle.jdeveloper.compiler.OjcConfiguration">
       <value n="webIANAEncoding" v="UTF-8"/>
    </hash>
+   <hash n="oracle.jdeveloper.maven.compiler.MavenConfiguration">
+      <value n="goalProfile" v="Default"/>
+      <url n="pomfileURL" path="../../../../../../Oracle/Projects/JDeveloper/runHTMLJenkins/pom.xml"/>
+   </hash>
    <hash n="oracle.jdeveloper.model.J2eeSettings">
       <value n="j2eeWebAppName" v="master-master-webapp"/>
       <value n="j2eeWebContextRoot" v="master-master-context-root"/>
