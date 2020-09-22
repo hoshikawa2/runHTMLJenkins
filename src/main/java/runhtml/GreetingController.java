@@ -152,6 +152,9 @@ public class GreetingController {
     			"</body>\r\n" + 
     			"\r\n" + 
     			"</html>";
+            
+        msgOut = "OK";
+            
         return msgOut;
     }
 }
