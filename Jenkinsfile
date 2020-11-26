@@ -12,12 +12,13 @@ pipeline {
     }
     */
     stages {
+        /*
         stage('SonarQube') {
             steps {
                 // Sonarqube
                 sh "mvn sonar:sonar  -Dsonar.projectKey=runHTML -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=8e17c50243b436dbf0ecea60d8e54412d1c7d793"
             }
-        }
+        }*/
         stage('Build') { 
             steps {
                 sh "mvn -f pom.xml package" 
